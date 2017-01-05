@@ -45,7 +45,7 @@ public class ClientController {
 		Mail mail=new Mail();
 		mail.setSmtpHost("smtp.163.com");/** 设置SMTP **/
 		String mailFrom="15921952463@163.com";
-		String password="asdf7468479";
+		String password="密码";
 		mail.setFrom(mailFrom);
 		mail.setSmtpAuthentication(mailFrom, password);/** 账号及密码 **/
 		mail.setTo(email);/** 发送给谁 **/
