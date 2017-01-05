@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.Select.dao.CourseMapper">
+
+
+	<select id="searchCourse" resultType="cn.Select.model.Course"
+		parameterType="cn.Select.model.Course">
+		select
+		a.`CODE` code,
+		a.TITLE title,
+		b.id id,
+		b.Start_Date start_date,
+		b.End_Date
+		end_date,
+		c.CITY city
+		from Course a , Course_Session b, Location c
+		<trim prefix="where" prefixOverrides="and">
+			b.Course_Code = a.`CODE` and b.Location_ID = c.ID
+			<if test="code != null and code != '' ">
+				and b.Course_Code = #{code, jdbcType=VARCHAR}
+			</if>
+			<if test="title != null and title != '' ">
+				and a.TITLE = #{title, jdbcType=VARCHAR}
+			</if>
+			<if test="city != null and city != '' ">
+				and c.CITY = #{city, jdbcType=VARCHAR}
+			</if>
+			<if test="start_date != null and start_date != '' ">  
+                <![CDATA[   
+    		and DATE_FORMAT(b.Start_Date,'%Y-%m-%d') >=DATE_FORMAT(#{start_date}, '%Y-%m-%d')   ]]>
+			</if>
+			<if test="end_date != null and end_date != '' ">  
+      		<![CDATA[   
+    		and DATE_FORMAT(b.End_Date,'%Y-%m-%d') <= DATE_FORMAT(#{end_date}, '%Y-%m-%d')     ]]>
+			</if>
+		</trim>
+	</select>
+
+</mapper>

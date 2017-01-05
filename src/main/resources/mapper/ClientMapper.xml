@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.Select.dao.ClientMapper">
+
+	<insert id="register" parameterType="cn.Select.model.Client"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Client
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="null != Lastname">
+				Lastname,
+			</if>
+			<if test="null != Firstname">
+				Firstname,
+			</if>
+			<if test="null != Address">
+				Address,
+			</if>
+			<if test="null != Phone">
+				Phone,
+			</if>
+			<if test="null != Email">
+				Email,
+			</if>
+			<if test="null != Course_Session_ID">
+				Course_Session_ID,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="null != Lastname and '' != Lastname ">
+				#{Lastname,jdbcType=VARCHAR},
+			</if>
+			<if test="null != Firstname and '' != Firstname ">
+				#{Firstname,jdbcType=VARCHAR},
+			</if>
+			<if test="null != Address and '' != Address ">
+				#{Address,jdbcType=VARCHAR},
+			</if>
+			<if test="null != Phone and '' != Phone ">
+				#{Phone,jdbcType=VARCHAR},
+			</if>
+			<if test="null != Email and '' != Email ">
+				#{Email,jdbcType=VARCHAR},
+			</if>
+			<if test="null != Course_Session_ID and '' != Course_Session_ID ">
+				#{Course_Session_ID,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+</mapper>
